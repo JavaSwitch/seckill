@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="LOG_DIR" value="./log"/>
+    <property name="PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{39} - %msg%n"/>
+
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/error.log</file>
+        <encoder>
+            <charset>utf-8</charset>
+            <pattern>${PATTERN}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/error-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <!--保存日志天数-->
+            <maxHistory>7</maxHistory>
+            <!--单个日志文件大小-->
+            <maxFileSize>200MB</maxFileSize>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="INFO-APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--最常用的滚动策略，它根据时间来制定滚动策略，既负责滚动也负责出发滚动&ndash;&gt;-->
+        <file>${LOG_DIR}/info.log</file>
+        <encoder>
+            <charset>utf-8</charset>
+            <pattern>${PATTERN}</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/info-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <!--保存日志天数-->
+            <maxHistory>7</maxHistory>
+            <!--单个日志文件大小-->
+            <maxFileSize>200MB</maxFileSize>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{39} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 下面的logger需要修改为你的项目根路径，如com.xxx.uc -->
+    <Logger name="com.zhuawa.course" level="debug" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </Logger>
+
+    <!--这个是自定义日志类型SQLTRACE-->
+    <logger name="SQLTRACE" level="info" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+
+    <root level="info">
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

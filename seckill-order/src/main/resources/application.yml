@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-bean-definition-overriding: true
+
+# 配置slq打印日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+dubbo:
+  application:
+    name: seckill-user
+  registry:
+    address: zookeeper://47.112.49.245:2181
+  protocol:
+    name: dubbo
+    port: 20880
+  consumer:
+    timeout: 3000
+  scan:
+    base-packages: com.hwk.seckill.order.service
