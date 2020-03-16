@@ -2,9 +2,19 @@
 
 本商品秒杀系统是主要依赖于Redis实现的，在高并发场景下，传统的DB层会出现瓶颈，因此，考虑到更是秒杀场景，直接上Redis替代DB，等秒杀结束后，数据最终会落地到DB。Redis在高并发下，10万+的QPS，轻松缓解秒杀业务带来了流量压力。
 
-## 开发环境
 
-JDK8 + Maven + Spring + SpringMVC + MyBatis Plus + Redis + RocketMQ + MySQL 
+
+## 开发框架
+
+开发环境：JDK8 + Maven 
+
+项目框架： Spring + SpringMVC + MyBatis Plus +MySQL
+
+中间件： Redis + RocketMQ 
+
+分布式：Dubbo+Zookeeper
+
+
 
 ## 实现技术点
 
