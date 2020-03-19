@@ -60,7 +60,7 @@ public class MQConsumer {
                     System.out.println("下单结果：" + result);
 
                     if(result){ // 表示下单成功
-                        // 下单后，去减商品库存
+                        // 下单后，去数据库层减商品库存
                         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
                     }
 
